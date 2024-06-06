@@ -1,0 +1,15 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+    Core
+{% endblock title %}
+
+{% block titulo %}
+    <h1>App Core</h1>
+{% endblock titulo %}<h1>INDEX CORE</h1>
+
+{% block contenido %}
+    <a href="{% url 'productos:home' %}">Productos</a>
+    <a href="{% url 'pruebas:home' %}">Pruebas</a>
+{% endblock contenido %}
