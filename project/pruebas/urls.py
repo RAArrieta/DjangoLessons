@@ -5,5 +5,7 @@ app_name="pruebas"
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('enviar_lista/', views.enviar_lista, name="enviar_lista" )
+    path('enviar_lista/', views.enviar_lista, name="enviar_lista"),
+    path('select_productos/', views.select_productos, name="select_productos"),
+    path('agregar_producto/', views.agregar_producto, name='agregar_producto'),
 ]

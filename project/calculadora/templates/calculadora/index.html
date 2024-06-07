@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+    <h1>Calculadora</h1>
+    
+    <form method="POST" action="{% url 'calculadora:home' %}">
+        {% csrf_token %}
+        <input type="number" name="a" id="a" placeholder="Ingrese un número">
+        <input type="number" name="b" id="b" placeholder="Ingrese un número">
+        <button type="submit">Sumar</button>
+    </form>
+    {% include 'calculadora/components/resultado.html' %}
+{% endblock contenido %}

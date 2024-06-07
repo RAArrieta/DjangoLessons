@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+    <h2>Productos</h2>
+    <form method="POST" action="{% url 'pruebas:agregar_producto' %}">
+        {% csrf_token %}
+        {% for categoria, productos in categorias.items %}
+            <select name="producto" id="producto_{{ forloop.counter }}">
+                <option disabled selected>{{ categoria }}</option>
+                {% for producto in productos %}
+                    <option value="{{ producto.id }}">{{ producto.nombre }} ${{ producto.precio }}</option>
+                {% endfor %}
+            </select>
+        {% endfor %}
+        <input type="number" name="cantidad" placeholder="Cantidad" value="1">
+        <button type="submit">Agregar</button>
+    </form>
+{% endblock contenido %}
