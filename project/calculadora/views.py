@@ -1,12 +1,22 @@
 from django.shortcuts import render
 from . import funciones
 
-# Create your views here.
 def home(request):
-    resultado = None  # Define un valor por defecto para resultado
+    resultado = None  
     if request.method == 'POST':
-        a = int(request.POST.get('a', 0))  # Obtén el valor de 'a' y conviértelo a entero
-        b = int(request.POST.get('b', 0))  # Obtén el valor de 'b' y conviértelo a entero
-        resultado = funciones.sumar(a, b)
+        a = int(request.POST.get('a', 0))  
+        b = int(request.POST.get('b', 0))  
+        if 'sumar' in request.POST:
+            resultado = funciones.sumar(a, b)
+            return render(request, "calculadora/index.html", {'resultado': resultado})
+        if 'restar' in request.POST:
+            resultado = funciones.restar(a, b)
+            return render(request, "calculadora/index.html", {'resultado': resultado})
+        if 'multiplicar' in request.POST:
+            resultado = funciones.multiplicar(a, b)
+            return render(request, "calculadora/index.html", {'resultado': resultado})
+        if 'dividir' in request.POST:
+            resultado = funciones.dividir(a, b)
+            return render(request, "calculadora/index.html", {'resultado': resultado})
         
     return render(request, "calculadora/index.html", {'resultado': resultado})

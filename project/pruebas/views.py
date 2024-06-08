@@ -1,11 +1,11 @@
 from collections import defaultdict
 from django.shortcuts import render
 from productos.models import Producto
+from . import funciones
 
 # Create your views here.
 
 def home(request):
-    enviar_lista
     return render(request, "pruebas/index.html")
 
 def enviar_lista(request):
@@ -13,29 +13,40 @@ def enviar_lista(request):
     return render(request, "pruebas/components/lista.html", {'lista':lista})
 
 def select_productos(request):
-    productos = Producto.objects.all()
-    categorias = {}
-    for producto in productos:
-        if producto.categoria not in categorias:
-            categorias[producto.categoria] = []
-        categorias[producto.categoria].append(producto)
-    
-    context = {
-        'categorias': categorias
-    }
-    
-    return render(request, 'pruebas/components/select_productos.html', context)
+    categorias=funciones.select_productos()
+    producto=None
+    cantidad=0
+    mensaje=None
 
-def agregar_producto(request):
     if request.method == 'POST':
         producto_id = request.POST.get('producto')
-        cantidad = request.POST.get('cantidad')
-        
-        # Obtener el objeto Producto correspondiente al producto_id
-        producto = Producto.objects.get(pk=producto_id)
-        
-        # Imprimir el nombre del producto
-        print(f"Producto: {producto.nombre}")
-        print(f"Cantidad: {cantidad}")
+        cantidad = int(request.POST.get('cantidad'))
+        if not producto_id:
+            mensaje="Debe seleccionar un producto..."
+        else:
+            producto = Producto.objects.get(pk=producto_id)
+            mensaje=None
+ 
+ 
+    context = {
+        'categorias': categorias,
+        'producto':producto,
+        'cantidad':cantidad,
+        'mensaje':mensaje
+    }
     
-    return render(request, "pruebas/components/agregar_producto.html")
+    return render(request, 'pruebas/components/select_productos/select_productos.html', context)
+
+# def agregar_producto(request):
+#     if request.method == 'POST':
+#         producto_id = request.POST.get('producto')
+#         cantidad = request.POST.get('cantidad')
+        
+#         # Obtener el objeto Producto correspondiente al producto_id
+#         producto = Producto.objects.get(pk=producto_id)
+        
+#         producto_pedido={
+#             'producto':producto,
+#             'cantidad':cantidad
+#         }
+#     return render(request, "pruebas/components/select_productos/select_productos.html",producto_pedido)
