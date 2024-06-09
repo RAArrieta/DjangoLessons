@@ -3,8 +3,6 @@ from django.shortcuts import render
 from productos.models import Producto
 from . import funciones
 
-# Create your views here.
-
 def home(request):
     return render(request, "pruebas/index.html")
 
@@ -36,17 +34,3 @@ def select_productos(request):
     }
     
     return render(request, 'pruebas/components/select_productos/select_productos.html', context)
-
-# def agregar_producto(request):
-#     if request.method == 'POST':
-#         producto_id = request.POST.get('producto')
-#         cantidad = request.POST.get('cantidad')
-        
-#         # Obtener el objeto Producto correspondiente al producto_id
-#         producto = Producto.objects.get(pk=producto_id)
-        
-#         producto_pedido={
-#             'producto':producto,
-#             'cantidad':cantidad
-#         }
-#     return render(request, "pruebas/components/select_productos/select_productos.html",producto_pedido)

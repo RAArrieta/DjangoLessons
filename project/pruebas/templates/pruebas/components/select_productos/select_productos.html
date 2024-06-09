@@ -5,17 +5,26 @@
     <h1>Productos</h1>
     <form method="POST" action="{% url 'pruebas:select_productos' %}">
         {% csrf_token %}
-        {% for categoria, productos in categorias.items %}
-            <select name="producto" id="producto_{{ forloop.counter }}">
-                <option disabled selected>{{ categoria }}</option>
-                {% for producto in productos %}
-                    <option value="{{ producto.id }}">{{ producto.nombre }} ${{ producto.precio }}</option>
+        <div class="form-selects-conteiner">
+            <div class="form-selects">
+                {% for categoria, productos in categorias.items %}
+                    <div class="select-container">
+                        <select class="selects" name="producto" id="producto_{{ forloop.counter }}">
+                            <option disabled selected>{{ categoria }}</option>
+                            {% for producto in productos %}
+                                <option value="{{ producto.id }}">{{ producto.nombre }} ${{ producto.precio }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 {% endfor %}
-            </select>
-        {% endfor %}
-        <input type="number" name="cantidad" placeholder="Cantidad" value="1" min="1" required>
-        <button type="submit">Agregar</button>
+            </div>
+            <div class="form-controls">
+                <input type="number" name="cantidad" placeholder="Cantidad" value="1" min="1" required>
+                <button type="submit">Agregar</button>
+            </div>
+        </div>
     </form>
+
     {% include "pruebas/components/select_productos/agregar_producto.html" %}
-    <a href="{% url 'core:home' %}">Home</a>
 {% endblock contenido %}
+
