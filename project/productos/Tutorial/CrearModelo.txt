@@ -1,0 +1,20 @@
+CREAMOS EL MODELO EN EL ARCHIVO models.py
+
+class Producto(models.Model):
+    categoria=models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
+    nombre=models.CharField(max_length=50, verbose_name="Producto")
+    precio=models.IntegerField(blank=True, null=True, verbose_name="Precio Unitario")
+    precio_doc=models.IntegerField(blank=True, null=True, verbose_name="Precio por docena")
+    precio_media=models.IntegerField(blank=True, null=True, verbose_name="Precio por mitad")
+    stock = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    numero flotante = models.FloatField()
+    image = models.ImageField(upload_to='images/')
+    hora = models.TimeField()
+
+    
+    def __str__(self):
+        return self.nombre
+
+
+

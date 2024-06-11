@@ -1,0 +1,46 @@
+PARA MANIPULAR DESDE LA TERMINAL LA BASE DE DATOS
+* PRIMERO ABRIMOS SHELL
+python manage.py shell
+
+** SEGUNDO IMPORTAMOS EL MODELO
+from NOMBREAPP.models import NOMBREMODELO
+from productos.models import Cliente  
+
+* AGREGAR *
+- A UNA VARIABLE CUALQUIERA LE PASAMOS LOS VALORES DE CADA CAMPO
+clt=Cliente(nombre="Celeste", email="celes@gmail.com")
+
+- Y LUEGO GUARDAMOS
+clt.save()
+
+- AGREGAR CON UNA SOLA INSTRUCCION 
+clt2=Cliente.objects.create(nombre="Santino", email="santi@gmail.com")
+
+- ACTUALIZAR
+clt2.email="nana@gmail.com"
+clt2.save()
+
+- CARGO EL CLIENTE EN UNA VARIABLE
+clt=Cliente.objects.get(id=2)
+
+- BORRAR
+clt.delete()
+
+- TRAER TODOS LOS DATOS DE CLIENTE
+Lista=Cliente.objects.all()
+
+- BUSCAR POR CRITERIOS
+Producto.objects.filter(precio=4300)  
+Producto.objects.filter(precio=4300, precio_doc=600)
+
+> = __gte 
+< = __lte
+
+- BUSCAR DENTRO DE UN RANGO
+Producto.objects.filter(precio__range=(4500,5000)) 
+
+- MOSTRAR ORDENADOS DE MENOR A MAYOR 
+Producto.objects.filter(precio__gte=4300).order_by("precio")
+
+-MOSTRAR DE MAYOR A MENORProducto.objects.filter(precio__gte=4300).order_by("-precio") 
+
